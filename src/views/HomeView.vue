@@ -30,6 +30,16 @@ export default {
     SelectGroup,
     NoPost,
     PostCard
+  },
+  created () {
+    this.test();
+  },
+  methods: {
+    test () {
+      this.axios.get('https://thawing-retreat-19220.herokuapp.com/users').then((response) => {
+        console.log(response)
+      })
+    }
   }
 }
 </script>
