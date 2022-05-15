@@ -8,7 +8,7 @@
       </div>
     </div>
     <p class="postCard__content">{{ info.content }}</p>
-    <span class="postCard__img"></span>
+    <span class="postCard__img" :style="{ backgroundImage: `url(${info.photo})`}"></span>
   </div>
 </template>
 
@@ -70,8 +70,10 @@ export default {
     height: 157px;
     border: 2px solid #000400;
     border-radius: 8px;
-    background-color: gray;
     margin-top: 16px;
+    background-size: cover;
+    background-position:  center;
+    background-repeat: no-repeat;
   }
 }
 </style>
