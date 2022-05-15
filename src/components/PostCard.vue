@@ -1,7 +1,7 @@
 <template>
   <div class="postCard">
     <div class="postCard__user d-flex">
-      <span class="postCard__user__img"></span>
+      <span class="postCard__user__img" :style="{ backgroundImage: `url(${info.user.photo})`}"></span>
       <div class="postCard__user__info d-flex flex-column">
         <span class="postCard__user__info__name">{{ info.user.name }}</span>
         <span class="postCard__user__info__time">{{ info.createdAt }}0</span>
@@ -38,6 +38,9 @@ export default {
       border: 2px solid #000400;
       background-color: #E2EDFA;
       margin-right: 16px;
+      background-size: cover;
+      background-position:  center;
+      background-repeat: no-repeat;
     }
     &__info {
       span {
