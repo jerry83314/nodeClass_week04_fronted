@@ -7,16 +7,16 @@
           <div class="create__content">
             <div class="form-group">
               <label for="postContent">貼文內容</label>
-              <textarea class="form-control" id="postContent" rows="8" placeholder="輸入您的貼文內容"></textarea>
+              <textarea class="form-control" id="postContent" rows="8" placeholder="輸入您的貼文內容" v-model="post.content"></textarea>
             </div>
             <div class="form-group text-left">
               <button type="button" class="btn btn-dark">上傳圖片</button>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="圖片網址">
+              <input type="text" class="form-control" placeholder="圖片網址" v-model="post.photo">
             </div>
             <div class="form-group">
-              <button type="button" class="btn-post">送出貼文</button>
+              <button type="button" class="btn-post" @click.prevent="handleNewPost()">送出貼文</button>
             </div>
           </div>
         </div>
@@ -35,6 +35,33 @@ export default {
   name: 'HomeView',
   components: {
     SideBar
+  },
+  data () {
+    return {
+      post: {
+        user: '627a7e483daec2a5eda5f42c',
+        content: '',
+        photo: ''
+      }
+    }
+  },
+  methods: {
+    handleNewPost () {
+      const url = 'https://thawing-retreat-19220.herokuapp.com/posts';
+      this.axios.post(url, this.post)
+        .then((res) => {
+          if (res.data.status === 'success') {
+            this.post.content = ''
+            this.post.photo = ''
+            alert('貼文送出成功');
+          } else {
+            alert('貼文送出失敗');
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
   }
 }
 </script>
