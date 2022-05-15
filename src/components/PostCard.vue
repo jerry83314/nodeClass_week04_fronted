@@ -3,16 +3,20 @@
     <div class="postCard__user d-flex">
       <span class="postCard__user__img"></span>
       <div class="postCard__user__info d-flex flex-column">
-        <span class="postCard__user__info__name">邊緣小杰</span>
-        <span class="postCard__user__info__time">2022/1/10 12:00</span>
+        <span class="postCard__user__info__name">{{ info.user.name }}</span>
+        <span class="postCard__user__info__time">{{ info.createdAt }}0</span>
       </div>
     </div>
-    <p class="postCard__content">外面看起來就超冷.... <br>我決定回被窩繼續睡....>.&lt;</p>
+    <p class="postCard__content">{{ info.content }}</p>
     <span class="postCard__img"></span>
   </div>
 </template>
 
 <script>
+export default {
+  name: 'PostCard',
+  props: [ 'info' ]
+}
 </script>
 
 <style lang="scss" scoped>

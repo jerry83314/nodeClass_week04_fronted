@@ -3,9 +3,10 @@
     <div class="row">
       <div class="col-md-8">
         <SelectGroup />
-        <PostCard />
-        <PostCard />
-        <PostCard />
+        <template v-for="item in posts">
+          <PostCard :info="item" />
+        </template>
+        
         <template v-if="false">
           <NoPost />
         </template>
@@ -31,14 +32,29 @@ export default {
     NoPost,
     PostCard
   },
+  data () {
+    return {
+      posts: []
+    }
+  },
   created () {
-    this.test();
+    this.handleGetPosts();
   },
   methods: {
-    test () {
-      this.axios.get('https://thawing-retreat-19220.herokuapp.com/users').then((response) => {
-        console.log(response)
-      })
+    handleGetPosts () {
+      const url = 'https://thawing-retreat-19220.herokuapp.com/posts';
+      this.axios.get(url)
+        .then((res) => {
+          if (res.data.status === 'success') {
+            this.posts = res.data.data
+            console.log('this.posts', this.posts)
+          } else {
+            return false
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }
