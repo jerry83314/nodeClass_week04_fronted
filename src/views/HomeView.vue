@@ -3,12 +3,13 @@
     <div class="row">
       <div class="col-md-8">
         <SelectGroup />
-        <template v-for="item in posts">
-          <PostCard :info="item" />
-        </template>
-        
-        <template v-if="false">
+        <template v-if="posts.length === 0">
           <NoPost />
+        </template>
+        <template v-else>
+          <template v-for="item in posts">
+            <PostCard :info="item" />
+          </template>
         </template>
       </div>
       <div class="col-md-4">
@@ -47,7 +48,6 @@ export default {
         .then((res) => {
           if (res.data.status === 'success') {
             this.posts = res.data.data
-            console.log('this.posts', this.posts)
           } else {
             return false
           }
